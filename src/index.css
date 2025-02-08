@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container{
+    @apply mx-auto;
+}
+.active{
+    @apply underline underline-offset-8 text-primary;
+}
+img{
+    user-select: none;
+}

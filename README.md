@@ -45,6 +45,6 @@ FeshCart is a modern web application designed to provide users with a seamless e
 https://vhmed-hossam.github.io/FeshCart/
 
 # Note
-when you enter the website, you need to click on '<Take Me home>' button
+when you enter the website, you need to click on 'Take Me home' button
 
 © 2025FeshCart™ bg Vhmed. All Rights Reserved.

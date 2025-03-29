@@ -42,7 +42,7 @@ FeshCart is a modern web application designed to provide users with a seamless e
 ## Run the Project
 
 - Go to the live demo
-https://vhmed-hossam.github.io/FeshCart/
+<a href="https://vhmed-hossam.github.io/FeshCart/">FeshCart<a/>
 
 # Note
 when you enter the website, you need to click on 'Take Me home' button

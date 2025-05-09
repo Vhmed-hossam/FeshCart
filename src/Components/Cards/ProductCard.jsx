@@ -68,7 +68,7 @@ export default function Card({ product }) {
 
   return (
     <div
-      className="flex flex-col bg-white justify-around items-round max-w-sm border-gray-200 rounded-lg shadow-sm to-gray-100 hover:shadow-xl transition-all"
+      className="flex flex-col bg-white justify-around items-round max-w-sm border-gray-200 rounded-lg shadow-xs to-gray-100 hover:shadow-xl transition-all"
       key={product._id}
       onClick={() => navigate(`/product/${product._id}`)}
     >
@@ -97,7 +97,7 @@ export default function Card({ product }) {
                 return <StarG key={index} />;
               })}
             </div>
-            <p className="text-gray-900  text-xs font-semibold px-2.5 py-0.5 rounded-sm">
+            <p className="text-gray-900  text-xs font-semibold px-2.5 py-0.5 rounded-xs">
               {product.ratingsAverage}
             </p>
           </div>

@@ -128,7 +128,7 @@ export default function Navbar() {
               <PopoverContent>
                 <div className="p-4">
                   <div className="flex items-center">
-                    <div className="flex-shrink-0">
+                    <div className="shrink-0">
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

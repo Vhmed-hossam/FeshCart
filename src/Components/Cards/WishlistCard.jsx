@@ -24,7 +24,7 @@ export default function WishlistCard({ PId, addToCart, removeFromWishlist }) {
         <img
           src={PId.imageCover}
           alt={PId?.slug}
-          className="shadow-sm hover:shadow-lg transition-all rounded-md"
+          className="shadow-xs hover:shadow-lg transition-all rounded-md"
         />
         <div className="flex flex-row items-center justify-between mt-3">
           <h3 className="font-semibold text-gray-700 line-clamp-1 text-xl">

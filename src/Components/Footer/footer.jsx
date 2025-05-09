@@ -26,8 +26,8 @@ export default function footer() {
     const { IsloggedIn } = useContext(Authcont);
   
   return (
-    <footer className="bg-white rounded-lg shadow-sm m-4 p-4">
-      <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+    <footer className="bg-white rounded-lg shadow-xs m-4 p-4">
+      <div className="w-full max-w-(--breakpoint-xl) mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <a
             href="/"

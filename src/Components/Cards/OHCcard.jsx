@@ -9,7 +9,7 @@ export default function OHCcard({ item }) {
         <div className="flex gap-4">
           <img
             alt={item.product.title}
-            className="w-36 h-36 object-cover rounded"
+            className="w-36 h-36 object-cover rounded-sm"
             src={item.product.imageCover}
           />
           <div className="flex flex-col justify-between">

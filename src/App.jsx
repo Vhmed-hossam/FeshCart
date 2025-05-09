@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { HeroUIProvider } from "@heroui/react";
 import { ToastContainer } from "react-toastify";
 
@@ -150,7 +150,7 @@ export default function App() {
     },
     {
       path: "*",
-      element: <NotFound />,
+      element: <Navigate to="/" />,
     },
   ]);
 

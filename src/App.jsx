@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext, useContext } from "react";
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HeroUIProvider } from "@heroui/react";
 import { ToastContainer } from "react-toastify";
@@ -22,7 +22,6 @@ import AuthContextProvider from "./Contexts/Authcontext.jsx";
 import Address from "./Pages/Address/Address.jsx";
 import OrdersHistory from "./Pages/OrdersHistory/OrdersHistory.jsx";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Wishlist from "./Pages/WishList/wishlist.jsx";
 import LandingPage from "./Pages/Landing/Landing Page.jsx";
 import Brandsdata from "./Pages/Brandsdata/Brandsdata.jsx";
@@ -161,7 +160,6 @@ export default function App() {
         <HeroUIProvider>
           <RouterProvider router={router} />
           <ToastContainer />
-          {/* <ReactQueryDevtools /> */}
         </HeroUIProvider>
       </AuthContextProvider>
     </QueryClientProvider>

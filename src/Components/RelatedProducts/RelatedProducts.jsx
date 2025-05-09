@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Card from "../Cards/ProductCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -34,11 +33,12 @@ export default function RelatedProducts({ products }) {
             spaceBetween: 10,
           },
         }}
+
         className="mySwiper"
       >
         {products.map((product, index) => (
           <SwiperSlide key={index}>
-           <div className="w-full flex justify-center items-center"> <Card product={product} /></div>
+            <div className="w-full flex justify-center items-center"> <Card product={product} /></div>
           </SwiperSlide>
         ))}
       </Swiper>

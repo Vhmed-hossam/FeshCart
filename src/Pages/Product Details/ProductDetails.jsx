@@ -3,11 +3,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../../Components/Loading/loading";
 import { Button, Input, Spinner } from "@heroui/react";
-import Slider from "react-slick";
 import RelatedP from "../../Components/RelatedProducts/RelatedProducts";
 import { StarY } from "../../Components/Cards/ProductCard";
 import { toast } from "react-toastify";
 import { formatCurrency } from "../../helpers/currencyHelper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
 
 export const HeartIcon = ({
   fill = "currentColor",
@@ -36,6 +41,7 @@ export const HeartIcon = ({
     </svg>
   );
 };
+
 export const Closeicon = () => {
   return (
     <svg
@@ -54,6 +60,56 @@ export const Closeicon = () => {
     </svg>
   );
 };
+
+// Custom navigation arrows
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} custom-arrow`}
+      style={{ ...style, display: "block" }}
+      onClick={onClick}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="#007ddd"
+        className="w-8 h-8"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} custom-arrow`}
+      style={{ ...style, display: "block" }}
+      onClick={onClick}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="#007ddd"
+        className="w-8 h-8"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15 19l-7-7 7-7"
+        />
+      </svg>
+    </div>
+  );
+}
+
 export default function ProductDetails() {
   let { id } = useParams();
   const navigate = useNavigate();
@@ -87,7 +143,7 @@ export default function ProductDetails() {
 
   function GetRelatedProducts(catID) {
     setIsLoading(true);
-   const res = axios
+    axios
       .get(`https://ecommerce.routemisr.com/api/v1/products?category=` + catID)
       .then(({ data }) => {
         setRelatedProducts(data.data);
@@ -125,7 +181,6 @@ export default function ProductDetails() {
         draggable: true,
         progress: undefined,
         pauseOnFocusLoss: false,
-
       });
       console.error(error);
     } finally {
@@ -135,11 +190,14 @@ export default function ProductDetails() {
 
   async function fetchWishlist() {
     try {
-      const { data } = await axios.get("https://ecommerce.routemisr.com/api/v1/wishlist", {
-        headers: {
-          token: localStorage.getItem("token"),
-        },
-      });
+      const { data } = await axios.get(
+        "https://ecommerce.routemisr.com/api/v1/wishlist",
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
       setWishlist(data.data);
     } catch (error) {
       console.error("Error fetching wishlist:", error);
@@ -180,10 +238,6 @@ export default function ProductDetails() {
     }
   }
 
-  if (IsLoading) {
-    return <Loading />;
-  }
-
   function AddtoWishlist(productId) {
     setIsAddingtofav(true);
     axios
@@ -217,106 +271,108 @@ export default function ProductDetails() {
         setIsAddingtofav(false);
       });
   }
+
+  if (IsLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <div className="bg-gray-100">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row align-center justify-center m-4">
+        <div className=" flex justify-center items-center w-full px-4 py-8">
+          <div className="align-center justify-center m-4">
             <Button
               isIconOnly
               variant="ghost"
               color="danger"
-              onPress={() => navigate(-2)}
-              className="absolute top-4 right-4 md:relative md:top-0 md:right-0"
+              onPress={() => navigate(-1)}
             >
               <Closeicon />
             </Button>
-            <div className="w-full md:w-1/3 px-4 mb-8">
-              <Slider
-                dots={true}
-                infinite
-                speed={500}
-                slidesToShow={1}
-                slidesToScroll={1}
-                className="mt-4"
-                arrows={true}
-              >
-                <img src={ProductDetails?.imageCover} alt={ProductDetails?.slug}></img>
-                {ProductDetails?.images.map((image, index) => (
-                  <div key={index} className="w-full h-auto rounded-lg">
-                    <img
-                      src={image}
-                      alt={ProductDetails?.slug}
-                      className="w-full h-auto rounded-lg"
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </div>
-            <div className="w-full md:w-1/3 px-4 flex items-center justify-center">
-              <div className="h-fit">
-                <h2 className="text-2xl md:text-3xl font-bold">
-                  {ProductDetails?.title}
-                </h2>
-                <div className="mt-4">
-                  {ProductDetails?.priceAfterDiscount ? (
-                    <>
-                      <span className="text-2xl font-bold mr-2">
-                        {formatCurrency(ProductDetails?.priceAfterDiscount)}
+            <div className="w-full  p-2">
+              <div className=" flex flex-row max-md:flex-col max-md:items-center gap-4 items-top justify-between">
+                <div className="max-w-md">
+                  <Swiper
+                    spaceBetween={10}
+                    slidesPerView={1}
+                    className="mt-4"
+                    pagination={{
+                      dynamicBullets: true,
+                    }}
+                    modules={[Pagination]}
+                  >
+                    <SwiperSlide>
+                      <img
+                        src={ProductDetails?.imageCover}
+                        alt={ProductDetails?.slug}
+                        className=""
+                      />
+                    </SwiperSlide>
+                    {ProductDetails?.images?.map((image, index) => (
+                      <SwiperSlide key={index}>
+                        <img
+                          src={image}
+                          alt={ProductDetails?.slug}
+                          className="w-full h-auto rounded-lg"
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+                <div className="space-y-3 flex flex-col justify-around">
+                  <h2 className="text-2xl md:text-3xl font-bold">
+                    {ProductDetails?.title}
+                  </h2>
+                  <div className="flex items-center mb-4">
+                    <StarY />
+                    <span className="ml-2 text-gray-600">
+                      {ProductDetails?.ratingsAverage} (
+                      {ProductDetails?.ratingsQuantity} reviews)
+                    </span>
+                  </div>{" "}
+                  <div>
+                    {" "}
+                    <div className="flex items-center">
+                      <h2 className="text-lg font-semibold mr-0.5">Brand:</h2>
+                      <span className="text-gray-600">
+                        {ProductDetails?.brand?.name || "FeshCart"}
                       </span>
-                      <span className="text-lg text-gray line-through">
+                    </div>
+                    <div className="flex items-center">
+                      <h2 className="text-lg font-semibold mr-0.5">
+                        Category:
+                      </h2>
+                      <span className="text-gray-600">
+                        {ProductDetails?.category.name}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    {ProductDetails?.priceAfterDiscount ? (
+                      <>
+                        <span className="text-2xl font-bold mr-2">
+                          {formatCurrency(ProductDetails?.priceAfterDiscount)}
+                        </span>
+                        <span className="text-lg text-gray line-through">
+                          {formatCurrency(ProductDetails?.price)}
+                        </span>
+                        <p className="text-green-500">
+                          Saved{" "}
+                          {formatCurrency(ProductDetails?.price - ProductDetails?.priceAfterDiscount)}
+                        </p>
+                      </>
+                    ) : (
+                      <span className="text-2xl font-bold mr-2">
                         {formatCurrency(ProductDetails?.price)}
                       </span>
-                    </>
-                  ) : (
-                    <span className="text-2xl font-bold mr-2">
-                      {formatCurrency(ProductDetails?.price)}
-                    </span>
-                  )}
-                </div>
-                <div className="flex items-center mb-4">
-                  <StarY />
-                  <span className="ml-2 text-gray-600">
-                    {ProductDetails?.ratingsAverage} (
-                    {ProductDetails?.ratingsQuantity} reviews)
-                  </span>
-                </div>
-                <p className="text-gray-700 mb-6">
-                  {ProductDetails?.description}
-                </p>
-                <div className="mb-6 flex flex-col space-y-2">
-                  <div className="flex items-center">
-                    <h2 className="text-lg font-semibold mr-0.5">Brand:</h2>
-                    <span className="text-gray-600">
-                      {ProductDetails?.brand?.name || "FeshCart"}
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <h2 className="text-lg font-semibold mr-0.5">Category:</h2>
-                    <span className="text-gray-600">
-                      {ProductDetails?.category.name}
-                    </span>
+                    )}
                   </div>
                 </div>
-                <div className="mb-6 flex items-center gap-4 px-4">
-                  <label
-                    htmlFor="quantity"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Quantity:
-                  </label>
-                  <Input
-                    type="number"
-                    id="quantity"
-                    name="quantity"
-                    min="1"
-                    defaultValue="1"
-                    className="w-16 rounded-md"
-                    variant="bordered"
-                    color="primary"
-                    size="sm"
-                  />
-                </div>
+              </div>
+              <p className="text-gray-700 mb-6">
+                {ProductDetails?.description}
+              </p>
+              <div className="mb-6 flex flex-col space-y-2">
                 <div className="flex space-x-4 mb-6">
                   <Button
                     color="primary"
@@ -342,7 +398,9 @@ export default function ProductDetails() {
                     {IsAddingtofav ? (
                       <Spinner size="sm" color="danger" />
                     ) : (
-                      <HeartIcon filled={isProductInWishlist(ProductDetails._id)} />
+                      <HeartIcon
+                        filled={isProductInWishlist(ProductDetails._id)}
+                      />
                     )}
                   </Button>
                 </div>
@@ -350,7 +408,7 @@ export default function ProductDetails() {
             </div>
           </div>
         </div>
-        <div className="container mx-auto px-4">
+        <div className="bg-red-500 px-4b">
           <div className="flex flex-col md:flex-row items-center justify-between mb-4">
             <h2 className="text-2xl font-bold">Related Products</h2>
             <Button

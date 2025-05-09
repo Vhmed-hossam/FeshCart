@@ -1,4 +1,3 @@
-const { heroui } = require("@heroui/react");
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",

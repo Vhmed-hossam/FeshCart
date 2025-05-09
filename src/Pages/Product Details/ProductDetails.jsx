@@ -81,16 +81,18 @@ export default function ProductDetails() {
         GetRelatedProducts(data.data.category._id);
         setProductDetails(data.data);
         setIsLoading(false);
+        console.log(data);
       });
   }
 
   function GetRelatedProducts(catID) {
     setIsLoading(true);
-    axios
+   const res = axios
       .get(`https://ecommerce.routemisr.com/api/v1/products?category=` + catID)
       .then(({ data }) => {
         setRelatedProducts(data.data);
         setIsLoading(false);
+        console.log(data);
       });
   }
 
@@ -286,7 +288,7 @@ export default function ProductDetails() {
                   <div className="flex items-center">
                     <h2 className="text-lg font-semibold mr-0.5">Brand:</h2>
                     <span className="text-gray-600">
-                      {ProductDetails?.brand.name}
+                      {ProductDetails?.brand?.name || "FeshCart"}
                     </span>
                   </div>
                   <div className="flex items-center">
@@ -348,7 +350,7 @@ export default function ProductDetails() {
             </div>
           </div>
         </div>
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between mb-4">
             <h2 className="text-2xl font-bold">Related Products</h2>
             <Button

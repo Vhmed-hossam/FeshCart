@@ -68,7 +68,7 @@ export default function Card({ product }) {
 
   return (
     <div
-      className="flex flex-col bg-white hover:scale-[1.02] justify-around items-round max-w-sm border-gray-200 rounded-lg shadow-sm to-gray-100 hover:shadow-lg transition-all"
+      className="flex flex-col bg-white justify-around items-round max-w-sm border-gray-200 rounded-lg shadow-sm to-gray-100 hover:shadow-xl transition-all"
       key={product._id}
       onClick={() => navigate(`/product/${product._id}`)}
     >

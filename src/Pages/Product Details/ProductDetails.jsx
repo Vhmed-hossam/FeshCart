@@ -408,7 +408,7 @@ export default function ProductDetails() {
             </div>
           </div>
         </div>
-        <div className="bg-red-500 px-4b">
+        <div className="px-4b">
           <div className="flex flex-col md:flex-row items-center justify-between mb-4">
             <h2 className="text-2xl font-bold">Related Products</h2>
             <Button

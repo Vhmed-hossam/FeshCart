@@ -23,43 +23,52 @@ export const AcmeLogo = () => {
 };
 
 export default function footer() {
-    const { IsloggedIn } = useContext(Authcont);
-  
+  const { IsloggedIn } = useContext(Authcont);
+
   return (
-    <footer className="bg-white rounded-lg shadow-xs m-4 p-4">
-      <div className="w-full max-w-(--breakpoint-xl) mx-auto p-4 md:py-8">
+    <footer className="bg-white rounded-lg shadow-xs  p-4">
+      <div className="w-full mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
-          <a
-            href="/"
-            className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
-          >
-            <AcmeLogo />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap text-primary">
-              FeshCart
-            </span>
-          </a>
-          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0">
-            <li>
-{IsloggedIn ? (
-                <Link to={"/home"} className="hover:underline me-4 md:me-6 text-black">
-                Home
-              </Link>
-            ) : (
-                <Link to={"/login"} className="hover:underline me-4 md:me-6 text-black">
-                Log In
-              </Link>
-)}
-            </li>
-          </ul>
+          <div>
+            <a
+              href="/"
+              className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
+            >
+              <AcmeLogo />
+              <span className="self-center text-2xl font-semibold whitespace-nowrap text-primary">
+                FeshCart
+              </span>
+            </a>
+            <p className="text-gray-500">
+              © {new Date().getFullYear()}{" "}
+              <a href="/" className="hover:underline">
+                FeshCart™ by Vhmed
+              </a>
+              . All Rights Reserved.
+            </p>
+          </div>
+          <div>
+            <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0">
+              <li>
+                {IsloggedIn ? (
+                  <Link
+                    to={"/home"}
+                    className="hover:underline me-4 md:me-6 text-black"
+                  >
+                    Home
+                  </Link>
+                ) : (
+                  <Link
+                    to={"/login"}
+                    className="hover:underline me-4 md:me-6 text-black"
+                  >
+                    Log In
+                  </Link>
+                )}
+              </li>
+            </ul>
+          </div>
         </div>
-        <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
-        <span className="block text-sm text-gray-500 sm:text-center">
-          © {new Date().getFullYear()}
-          <a href="/" className="hover:underline">
-            FeshCart™ bg Vhmed
-          </a>
-          . All Rights Reserved.
-        </span>
       </div>
     </footer>
   );

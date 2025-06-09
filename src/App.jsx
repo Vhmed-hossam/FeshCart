@@ -1,6 +1,5 @@
 import React from "react";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
-import { HeroUIProvider } from "@heroui/react";
 import { ToastContainer } from "react-toastify";
 
 import Home from "./Pages/Home/home.jsx";
@@ -10,7 +9,6 @@ import Brands from "./Pages/Brands/brands.jsx";
 import Categories from "./Pages/Categories/categs.jsx";
 import Cart from "./Pages/Cart/cart.jsx";
 import ProductDetails from "./Pages/Product Details/ProductDetails.jsx";
-import NotFound from "./Pages/NotFound/NotFound.jsx";
 import RelatedProductspage from "./Components/RelatedProducts/RelatedProductsPage.jsx";
 
 import Layout from "./Components/Layouts/layout.jsx";
@@ -157,10 +155,8 @@ export default function App() {
   return (
     <QueryClientProvider client={queryclient}>
       <AuthContextProvider>
-        <HeroUIProvider>
           <RouterProvider router={router} />
           <ToastContainer />
-        </HeroUIProvider>
       </AuthContextProvider>
     </QueryClientProvider>
   );

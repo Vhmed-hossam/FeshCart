@@ -4,7 +4,6 @@ import axios from "axios";
 import Loading from "../../Components/Loading/loading";
 import { Button, Input, Spinner } from "@heroui/react";
 import RelatedP from "../../Components/RelatedProducts/RelatedProducts";
-import { StarY } from "../../Components/Cards/ProductCard";
 import { toast } from "react-toastify";
 import { formatCurrency } from "../../helpers/currencyHelper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,6 +12,7 @@ import { Navigation, Pagination } from "swiper/modules";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+import { StarY } from "../../Icons/Stars/StarYellow";
 
 export const HeartIcon = ({
   fill = "currentColor",
@@ -60,55 +60,6 @@ export const Closeicon = () => {
     </svg>
   );
 };
-
-// Custom navigation arrows
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} custom-arrow`}
-      style={{ ...style, display: "block" }}
-      onClick={onClick}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="#007ddd"
-        className="w-8 h-8"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-      </svg>
-    </div>
-  );
-}
-
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} custom-arrow`}
-      style={{ ...style, display: "block" }}
-      onClick={onClick}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="#007ddd"
-        className="w-8 h-8"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M15 19l-7-7 7-7"
-        />
-      </svg>
-    </div>
-  );
-}
 
 export default function ProductDetails() {
   let { id } = useParams();

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "../../Components/Loading/loading";
 import BrandsCard from "../../Components/Cards/BrandsCard";
-export default function Categories() {
+export default function Brands() {
   function GetBrands() {
     return axios.get("https://ecommerce.routemisr.com/api/v1/brands");
   }

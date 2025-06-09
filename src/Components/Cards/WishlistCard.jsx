@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../../helpers/currencyHelper";
-import { Button, Spinner } from "@heroui/react";
-import { Halfstar, StarG, StarY } from "./ProductCard";
+import { StarY } from "../../Icons/Stars/StarYellow";
 
 export default function WishlistCard({ PId, addToCart, removeFromWishlist }) {
   const [Loading, setLoading] = useState(false);
-  const [IsRemovingW, setIsRemovingW] = useState(false)
+  const [IsRemovingW, setIsRemovingW] = useState(false);
   async function handleAddToCart(productId) {
     setLoading(true);
     await addToCart(productId);
     setLoading(false);
-  };
+  }
 
   async function RemoveW(productId) {
     setIsRemovingW(true);
@@ -51,17 +50,20 @@ export default function WishlistCard({ PId, addToCart, removeFromWishlist }) {
         </p>
       </Link>
       <div className="grid grid-cols-2 gap-3 px-2 pt-4">
-        <Button
-          color="primary"
-          variant="ghost"
+        <button
+          className="btn text-primary transition-all hover:bg-primary hover:text-white w-full p-1.5 rounded-lg mt-1 border-primary border-2"
           isLoading={Loading}
           onPress={() => handleAddToCart(PId._id)}
         >
-          {Loading ? '' : "Add to cart"}
-        </Button>
-        <Button color="danger" variant="ghost" onPress={() => RemoveW(PId._id)} isLoading={IsRemovingW}>
-          {IsRemovingW ? '' : "Delete"}
-        </Button>
+          {Loading ? "" : "Add to cart"}
+        </button>
+        <button
+          className="btn text-danger transition-all hover:bg-danger hover:text-white w-full p-1.5 rounded-lg mt-1 border-danger border-2"
+          onPress={() => RemoveW(PId._id)}
+          isLoading={IsRemovingW}
+        >
+          {IsRemovingW ? "" : "Delete"}
+        </button>
       </div>
     </div>
   );

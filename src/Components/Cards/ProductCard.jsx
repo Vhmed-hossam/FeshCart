@@ -1,61 +1,10 @@
 import React, { useState } from "react";
-import { Button, Input, ButtonGroup, Spinner } from "@heroui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart } from "../../Services/CartServices";
+import { StarG } from "../../Icons/Stars/StarGray";
+import { StarY } from "../../Icons/Stars/StarYellow";
+import { Halfstar } from "../../Icons/Stars/Halfstar";
 
-export const StarY = () => {
-  return (
-    <svg
-      className="w-4 h-4 text-yellow-300"
-      aria-hidden="true"
-      fill="currentColor"
-      viewBox="0 0 22 20"
-    >
-      <path
-        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534
-       0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 
-       1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 
-       9.2a1.523 1.523 0 0 0 .387-1.575Z"
-      />
-    </svg>
-  );
-};
-export const StarG = () => {
-  return (
-    <svg
-      className="w-4 h-4 text-[#c0c3c8]"
-      aria-hidden="true"
-      fill="currentColor"
-      viewBox="0 0 22 20"
-    >
-      <path
-        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534
-       0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 
-       1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 
-       9.2a1.523 1.523 0 0 0 .387-1.575Z"
-      />
-    </svg>
-  );
-};
-export const Halfstar = () => {
-  return (
-    <svg className="w-4 h-4" aria-hidden="true" viewBox="0 0 22 20">
-      <defs>
-        <linearGradient id="gradient" x1="0%" y1="100%" x2="100%" y2="100%">
-          <stop offset="50%" stopColor="#FFD700" />
-          <stop offset="50%" stopColor="#c0c3c8" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 
-        1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 
-        3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 
-        0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"
-        fill="url(#gradient)"
-      />
-    </svg>
-  );
-};
 
 export default function Card({ product }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -88,11 +37,12 @@ export default function Card({ product }) {
               {[1, 2, 3, 4, 5].map((index) => {
                 const roundedRating = Math.floor(product.ratingsAverage);
                 const isHalf = product.ratingsAverage % 1 >= 0.5;
-                if (index < roundedRating) {
-                  return <StarY key={index} />;
-                }
-                if (index === roundedRating && isHalf) {
+
+                if (index === roundedRating + 1 && isHalf) {
                   return <Halfstar key={index} />;
+                }
+                if (index <= roundedRating) {
+                  return <StarY key={index} />;
                 }
                 return <StarG key={index} />;
               })}
@@ -123,16 +73,13 @@ export default function Card({ product }) {
             </span>
           )}
         </Link>
-        <Button
-          color="primary"
-          radius="lg"
-          variant="ghost"
-          className="w-full"
+        <button
+          className="btn text-primary transition-all hover:bg-primary hover:text-white w-full p-1.5 rounded-lg mt-1 border-primary border-2"
           isLoading={isLoading}
           onPress={handleAddToCart}
         >
           Add To Cart
-        </Button>
+        </button>
       </div>
     </div>
   );

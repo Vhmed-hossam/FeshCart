@@ -1,4 +1,3 @@
-import React from "react";
 import OHCcard from "./OHCcard";
 import { FalseIcon, TrueIcon } from "../../Pages/Signup/signup";
 import { formatCurrency } from "../../helpers/currencyHelper";

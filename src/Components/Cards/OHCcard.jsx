@@ -1,6 +1,6 @@
 import React from "react";
 import { formatCurrency } from "../../helpers/currencyHelper";
-import { StarY } from "./ProductCard";
+import { StarY } from "../../Icons/Stars/StarYellow";
 
 export default function OHCcard({ item }) {
   return (

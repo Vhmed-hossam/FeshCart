@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button, ButtonGroup, Input, Spinner } from "@heroui/react";
 import { TrashIcon } from "../../Pages/Cart/cart";
-import { StarY } from "./ProductCard";
 import { formatCurrency } from "../../helpers/currencyHelper";
+import { StarY } from "../../Icons/Stars/StarYellow";
 
 export default function CartCards({
   Carddata,

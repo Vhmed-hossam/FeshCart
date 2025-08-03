@@ -1,18 +1,8 @@
-import { Button, Spinner } from "@heroui/react";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { formatCurrency } from "../../helpers/currencyHelper";
 import { Link } from "react-router-dom";
 
 export default function CheckoutData({ CData }) {
-  const [CartId, setCartId] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (CData) {
-      setCartId(CData._id);
-    }
-  }, [CData]);
-
   return (
     <div className="animate__animated animate__fadeIn">
       <div className="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full sticky top-36">
@@ -56,15 +46,7 @@ export default function CheckoutData({ CData }) {
               {formatCurrency((CData?.data?.totalCartPrice || 0) + 5.99)}
             </dd>
           </dl>
-          <Button
-            as={Link}
-            to={`/address/${CData?.cartId}`}
-            className="w-full"
-            color="primary"
-            disabled={loading}
-          >
-            {loading ? <Spinner size="sm" color="primary" /> : "Checkout"}
-          </Button>
+        <Link to={`/address/${CData?.cartId}`}><button className="btn-donate">Checkout</button></Link>
         </div>
       </div>
     </div>

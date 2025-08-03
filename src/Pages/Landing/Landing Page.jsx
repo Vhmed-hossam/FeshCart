@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { AcmeLogo } from "../Login/login";
 import { Button } from "@heroui/react";
 import { whyFeshCart } from "../../helpers/whyFeshCart";
+import { FeshcartLogo } from "../../Icons/Logo/Feshcart";
 
 export function verifyToken() {
   return axios
@@ -32,7 +32,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-100 to-gray-200 text-gray-800">
       <header className="w-full max-w-6xl mx-auto text-center py-20 px-4">
         <div className="mb-6 flex justify-center">
-          <AcmeLogo />
+          <FeshcartLogo />
         </div>
         <h1 className="text-5xl font-extrabold">Welcome to FeshCart</h1>
         <p className="mt-2 text-xl">Hello {userName || "User"} !</p>

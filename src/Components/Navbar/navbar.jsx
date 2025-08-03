@@ -1,9 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
+import {
+  Navbar as Nextuinavbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  Button,
+} from "@heroui/react";
+import { Popover, PopoverTrigger, PopoverContent } from "@heroui/react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Authcont } from "../../Contexts/Authcontext";
 import { HeartIcon } from "../../Pages/Product Details/ProductDetails";
 import { verifyToken } from "../../Pages/Landing/Landing Page";
-import { motion } from "framer-motion";
 
 export const AcmeLogo = () => {
   return (
@@ -35,8 +45,7 @@ export const AcmeLogo = () => {
 };
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [menuOpen, setmenuOpen] = useState(false);
   const NavItems = ["Home", "Categories", "Brands", "Cart"];
   const navigate = useNavigate();
   const { IsloggedIn, setIsloggedIn } = useContext(Authcont);
@@ -62,182 +71,139 @@ export default function Navbar() {
     navigate("/login");
     setIsloggedIn(false);
   };
-  const dropdownVariants = {
-    open: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.2,
-        ease: "easeInOut",
-      },
-    },
-    closed: {
-      opacity: 0,
-      y: -10,
-      transition: {
-        duration: 0.2,
-        ease: "easeInOut",
-      },
-    },
-  };
   return (
-    <nav className="bg-white shadow-md w-full z-50 top-0">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            {IsloggedIn && (
-              <button
-                aria-label={menuOpen ? "Close menu" : "Open menu"}
-                className="sm:hidden mr-2 text-gray-600 hover:text-gray-900 focus:outline-none"
-                onClick={() => setMenuOpen(!menuOpen)}
-              >
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-                  />
-                </svg>
-              </button>
-            )}
-            <Link to="/" className="flex items-center">
-              <AcmeLogo />
-              <p className="font-bold text-primary ml-2">FeshCart</p>
-            </Link>
-          </div>
-
-          {IsloggedIn && (
-            <div className="hidden sm:flex sm:items-center sm:space-x-4">
-              {NavItems.map((item, index) => (
-                <NavLink
-                  key={`${item}-${index}`}
-                  to={`/${item.toLowerCase()}`}
-                  className={({ isActive }) =>
-                    `px-3 py-2 text-sm font-medium ${
-                      isActive
-                        ? "text-primary border-b-2 border-primary"
-                        : "text-gray-600 hover:text-primary"
-                    }`
-                  }
-                >
-                  {item}
-                </NavLink>
-              ))}
-            </div>
-          )}
-          <div className="flex items-center space-x-4">
-            {IsloggedIn ? (
-              <>
-                <div className="relative">
-                  <button
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center focus:outline-none"
+    <Nextuinavbar onMenuOpenChange={setmenuOpen} shouldHideOnScroll>
+      <NavbarContent>
+        {IsloggedIn ? (
+          <NavbarMenuToggle
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden"
+          />
+        ) : (
+          ""
+        )}
+        <NavbarBrand>
+          <Link to="/" className="flex items-center">
+            <AcmeLogo />
+            <p className="font-bold text-inherit text-primary m-0">FeshCart</p>
+          </Link>
+        </NavbarBrand>
+      </NavbarContent>
+      {IsloggedIn && (
+        <NavbarContent justify="center" className="hidden sm:flex gap-4">
+          {NavItems.map((item, index) => (
+            <NavLink
+              key={`${item}-${index}`}
+              to={`/${item.toLowerCase()}`}
+              color="foreground"
+            >
+              {item}
+            </NavLink>
+          ))}
+        </NavbarContent>
+      )}
+      {IsloggedIn ? (
+        <>
+          <NavbarContent justify="end">
+            <NavbarItem></NavbarItem>
+            <Popover placement="bottom-start">
+              <PopoverTrigger>
+                <div className="flex -space-x-2 overflow-hidden">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-10"
                   >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                    />
+                  </svg>
+                </div>
+              </PopoverTrigger>
+              <PopoverContent>
+                <div className="p-4">
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0">
                     <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="h-10 w-10 text-gray-600"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                      />
-                    </svg>
-                  </button>
-                  {dropdownOpen && (
-                    <motion.div
-                    variants={dropdownVariants}
-                    initial="closed"
-                    animate="open"
-                    exit="closed"
-                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-10"
                   >
-                    <div className="px-4 py-2 flex items-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="h-10 w-10 text-gray-600"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                        />
-                      </svg>
-                      <p className="ml-3 text-sm font-medium text-gray-900">{userName}</p>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                    />
+                  </svg>
                     </div>
-                    <Link
-                      to="#"
-                      onClick={handleLogout}
-                      className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                    >
+                    <div className="ml-3">
+                      <p className="text-sm font-medium text-gray-900" id="yes">
+                        {userName}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="p-5 mt-3 grid grid-cols-1 gap-3">
+                    <Link onClick={handleLogout} className="text-danger">
                       Log Out
                     </Link>
-                  </motion.div>
-                  )}
+                  </div>
                 </div>
-                {/* Wishlist Button */}
-                <Link
-                  to="/wishlist"
-                  className="p-2 border-2 border-red-500 rounded-md text-red-500 hover:bg-red-50"
-                >
-                  <HeartIcon filled={true} className="text-red-500" />
-                </Link>
-              </>
-            ) : (
-              <>
-                <button
-                  onClick={() => navigate("/login")}
-                  className="px-4 py-2 text-sm font-medium text-primary border border-primary rounded-md hover:bg-primary hover:text-white"
-                >
-                  Login
-                </button>
-                <button
-                  onClick={() => navigate("/signup")}
-                  className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary-dark"
-                >
-                  Sign Up
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {IsloggedIn && menuOpen && (
-        <div className="sm:hidden bg-white shadow-md">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {NavItems.map((item, index) => (
-              <NavLink
-                key={`${item}-${index}`}
-                to={`/${item.toLowerCase()}`}
-                className={({ isActive }) =>
-                  `block px-3 py-2 text-sm font-medium ${
-                    isActive ? "text-primary bg-gray-100" : "text-gray-600 hover:text-primary"
-                  }`
-                }
-              >
-                {item}
-              </NavLink>
-            ))}
-          </div>
-        </div>
+              </PopoverContent>
+            </Popover>
+            <Button
+              isIconOnly
+              variant="bordered"
+              color="danger"
+              as={Link}
+              to={"/wishlist"}
+            >
+              <HeartIcon filled={true} className="text-danger" />
+            </Button>
+          </NavbarContent>
+        </>
+      ) : (
+        <NavbarContent justify="end">
+          <NavbarItem>
+            <Button
+              variant="ghost"
+              color="primary"
+              onPress={() => navigate("/login")}
+            >
+              Login
+            </Button>
+          </NavbarItem>
+          <NavbarItem>
+            <Button
+              color="primary"
+              variant="solid"
+              onPress={() => navigate("/signup")}
+            >
+              Sign Up
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
       )}
-    </nav>
+      <NavbarMenu>
+        {NavItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <NavLink
+              className="w-full"
+              to={`/${item.toLowerCase()}`}
+              color="foreground"
+            >
+              {item}
+            </NavLink>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
+    </Nextuinavbar>
   );
 }

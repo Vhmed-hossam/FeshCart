@@ -22,7 +22,7 @@ export default function BrandsCard({ category }) {
             />
           </div>
           <div>
-            <p className="text-base font-semibold text-gray-900 px-3 pt-2 text-black group-hover:text-blue-500 transition-all duration-200 ease-in-out">
+            <p className="text-base font-semibold px-3 pt-2 text-black group-hover:text-blue-500 transition-all duration-200 ease-in-out">
               {category.name}
             </p>
           </div>

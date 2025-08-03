@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../../helpers/currencyHelper";
 import { StarY } from "../../Icons/Stars/StarYellow";
+import { Button } from "@heroui/button";
 
 export default function WishlistCard({ PId, addToCart, removeFromWishlist }) {
   const [Loading, setLoading] = useState(false);
@@ -50,20 +51,22 @@ export default function WishlistCard({ PId, addToCart, removeFromWishlist }) {
         </p>
       </Link>
       <div className="grid grid-cols-2 gap-3 px-2 pt-4">
-        <button
-          className="btn text-primary transition-all hover:bg-primary hover:text-white w-full p-1.5 rounded-lg mt-1 border-primary border-2"
+        <Button
           isLoading={Loading}
+          color="primary"
+          variant="solid"
           onPress={() => handleAddToCart(PId._id)}
         >
           {Loading ? "" : "Add to cart"}
-        </button>
-        <button
-          className="btn text-danger transition-all hover:bg-danger hover:text-white w-full p-1.5 rounded-lg mt-1 border-danger border-2"
+        </Button>
+        <Button
+          color="danger"
+          variant="ghost"
           onPress={() => RemoveW(PId._id)}
           isLoading={IsRemovingW}
         >
           {IsRemovingW ? "" : "Delete"}
-        </button>
+        </Button>
       </div>
     </div>
   );
